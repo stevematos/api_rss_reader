@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+graphene
+feedparser
+python-dateutil
+sqlalchemy
+bcrypt
+alembic

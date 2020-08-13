@@ -1,0 +1,5 @@
+__pycache__
+*.pyc
+alembic/versions
+.idea
+sql_app.db
