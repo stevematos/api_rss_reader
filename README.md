@@ -25,5 +25,7 @@ Pasos para instalarlo:
     python main.py
 ```
 
+La aplicacion estar corriendo en el localhost:8000
+
 Si es la primera que lo corre la aplicacion , se creara la base de datos de forma automatica
- en sqllite.
+ en sqllite llamada sql_app.db.

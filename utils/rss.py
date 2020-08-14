@@ -14,8 +14,7 @@ def read_rss(rss: str) -> list:
             'published': entry.get('published', '') and date_parser.parse(entry.published),
             'image': entry.get('media_content', '') and entry.get('media_content')[0].get('url'),
             'author': entry.get('author', ''),
+            'link': entry.get('link', '')
         }
         res.append(entry_format)
     return res
-
-

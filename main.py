@@ -1,4 +1,5 @@
 import uvicorn
+import logging
 
 from schema import schema
 from fastapi import FastAPI
@@ -10,8 +11,18 @@ from models import Base
 
 Base.metadata.create_all(bind=engine)
 
-app = FastAPI()
+# setup loggers
 
+logging.basicConfig(
+    format='%(asctime)s,%(msecs)d %(levelname)-8s [%(filename)s:%(lineno)d] %(message)s',
+    datefmt='%Y-%m-%d:%H:%M:%S',
+    filename= 'api_rss_reader.log',
+    level = logging.DEBUG)
+
+# get root logger
+logger = logging.getLogger(__name__)
+
+app = FastAPI()
 
 origins = [
     "http://localhost:5000",

@@ -12,6 +12,7 @@ class Feed(graphene.ObjectType):
     published = graphene.DateTime()
     image = graphene.String()
     author = graphene.String()
+    link = graphene.String()
 
 
 class User(graphene.ObjectType):
