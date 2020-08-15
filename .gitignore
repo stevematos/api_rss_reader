@@ -3,3 +3,4 @@ __pycache__
 alembic/versions
 .idea
 sql_app.db
+api_rss_reader.log

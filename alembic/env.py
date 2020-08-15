@@ -20,8 +20,8 @@ fileConfig(config.config_file_name)
 # add your model's MetaData object here
 # for 'autogenerate' support
 
-from models import Feed
-target_metadata = Feed.metadata
+from models import Rss
+target_metadata = Rss.metadata
 
 # target_metadata = None
 # other values from the config, defined by the needs of env.py,
@@ -48,6 +48,7 @@ def run_migrations_offline():
         target_metadata=target_metadata,
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},
+        render_as_batch=True
     )
 
     with context.begin_transaction():

@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, DateTime
 from sqlalchemy.orm import relationship
 from database import Base
 
@@ -12,11 +12,26 @@ class User(Base):
     is_active = Column(Boolean, default=True)
 
 
-class Feed(Base):
-    __tablename__ = "feed"
+class Rss(Base):
+    __tablename__ = "rss"
 
     id = Column(Integer, primary_key=True, index=True)
     url_rss = Column(String, index=True)
     title = Column(String)
     user_id = Column(Integer, ForeignKey('user.id'))
     user = relationship("User")
+
+
+class Feed(Base):
+    __tablename__ = "feed"
+
+    id = Column(Integer, primary_key=True, index=True)
+    title = Column(String)
+    summary = Column(String)
+    published = Column(DateTime)
+    image = Column(String)
+    author = Column(String)
+    link = Column(String)
+    id_feed = Column(String)
+    rss_id = Column(Integer, ForeignKey('rss.id'))
+    rss = relationship("Rss")
