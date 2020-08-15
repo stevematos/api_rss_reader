@@ -3,8 +3,10 @@ from graphql import GraphQLError
 
 import crud
 from fastapi import Depends, HTTPException
+
+from utils.feed import save_feed
 from .types import User
-from schemas import UserSchema, FeedSchema
+from schemas import UserSchema, RssSchema
 from database import Session
 
 
@@ -34,15 +36,16 @@ class SubscribeFeed(graphene.Mutation):
         url_feed = graphene.String()
         title = graphene.String()
 
-    id_feed = graphene.Int()
+    id_rss = graphene.Int()
 
     def mutate(self, info, user_id: int, url_feed: str, title: str):
-        db_feed = crud.get_feed_by_url(Session, url=url_feed, user_id=user_id)
+        db_feed = crud.get_rss_by_url(Session, url=url_feed, user_id=user_id)
         if db_feed:
             raise GraphQLError("Feed ya esta creado")
-        schema_feed = FeedSchema(user_id=user_id, url_rss=url_feed, title=title)
-        feed_create = crud.subscribe_feed(Session, schema_feed)
-        return SubscribeFeed(id_feed=feed_create.id)
+        schema_rss = RssSchema(user_id=user_id, url_rss=url_feed, title=title)
+        rss_create = crud.subscribe_rss(Session, schema_rss)
+        save_feed(Session, rss_create)
+        return SubscribeFeed(id_rss=rss_create.id)
 
 
 class Mutation(graphene.ObjectType):
